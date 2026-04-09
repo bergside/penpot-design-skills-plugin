@@ -1,16 +1,10 @@
-# TypeUI Design Skill Generator for Penpot
+# Design skill files for Penpot
 
-A Penpot plugin that generates implementation-ready AI design-system guidance files from a canonical blueprint.
-
-Built by [TypeUI](https://www.typeui.sh).
-Browse more design skills at [https://www.typeui.sh/design-skills](https://www.typeui.sh/design-skills).
+Use this open-source plugin for Penpot to generate design skill files for AI providers such as Claude, Codex, Gemini or Cursor and create a blueprint of your design system with style specifications including colors, typography, spacings, shadows, branded content, and more.
 
 ## What it generates
 
-- `skill.md` (required, managed block structure aligned to the Design System Skill Blueprint)
-- `reference.md` (optional)
-- `examples.md` (optional)
-- `scripts/validate-skill.sh` (optional)
+It generates a generic `skill.md` file that can be used by all major AI providers based on the [TypeUI](https://wwww.typeui.sh) manifest.
 
 ## Features
 
@@ -21,47 +15,32 @@ Browse more design skills at [https://www.typeui.sh/design-skills](https://www.t
 - Quality checks for required sections and links
 - Preview, copy, and download actions inside the plugin UI
 
-## Development
+## Local development
 
-### Prerequisites
-
-- Node.js 18+
-- npm
-
-### Install
+If you want to run this locally you need to first install the dependencies:
 
 ```bash
 npm install
 ```
 
-### Run in watch mode
+And then create a local build:
 
-```bash
+```
+npm run build
+```
+
+And finally run the local server:
+
+```
 npm run dev
 ```
 
-Load the plugin in Penpot using:
+Finally, use the following URL to install the plugin inside Penpot:
 
 ```text
 http://localhost:4400/manifest.json
 ```
 
-### Build
+## License
 
-```bash
-npm run build
-```
-
-## Penpot Manifest
-
-The plugin manifest is in `public/manifest.json` and is configured as:
-
-- Name: `TypeUI Design Skill Generator`
-- Description: TypeUI-branded generator for design-system skill files
-- Code entry: `plugin.js`
-- Permissions: `content:read`, `allow:downloads`
-
-## Notes
-
-- Penpot officially documents `name`, `description`, `code`, `icon`, and `permissions` in plugin manifests.
-- TypeUI authorship is reflected in the UI, package metadata, and this documentation.
+This project is open-source under the MIT license and it was built by the authors of [TypeUI](https://wwww.typeui.sh).
