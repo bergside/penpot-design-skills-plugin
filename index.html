@@ -3,22 +3,175 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Penpot plugin example</title>
+    <title>TypeUI Skill Generator</title>
   </head>
   <body>
-    <p>Penpot plugin starter template</p>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">TypeUI for Penpot</p>
+        <h1>Design System Skill Generator</h1>
+        <p class="lede">
+          Generate reusable AI-ready <code>skill.md</code> files from a structured manifest using the
+          TypeUI manifest blueprint for tools such as Claude, Codex, Gemini, Cursor, and more.
+        </p>
+        <p class="links">
+          Built by <a target="_blank" rel="noreferrer" href="https://www.typeui.sh">TypeUI</a>.
+          Explore more styles at
+          <a target="_blank" rel="noreferrer" href="https://www.typeui.sh/design-skills"
+            >typeui.sh/design-skills</a
+          >.
+        </p>
+      </section>
 
-    <p>
-      Checkout the
-      <a target="_blank" href="https://help.penpot.app/plugins/"
-        >documentation</a
-      >
-      to get started.
-    </p>
+      <form id="skill-form" class="panel">
+        <div class="section-head">
+          <h2>Skill Manifest Inputs</h2>
+          <div class="actions">
+            <button id="defaults-button" class="secondary" type="button">Load defaults</button>
+            <button id="generate-button" type="submit">Generate files</button>
+          </div>
+        </div>
 
-    <button type="button" data-appearance="primary" data-handler="create-text">
-      Create text
-    </button>
+        <div class="grid two">
+          <label>
+            <span>Brand or scope slug</span>
+            <input id="brand-scope" required />
+          </label>
+          <label>
+            <span>Design system name</span>
+            <input id="design-system-name" required />
+          </label>
+        </div>
+
+        <label>
+          <span>Mission</span>
+          <textarea id="mission" rows="2" required></textarea>
+        </label>
+
+        <div class="grid two">
+          <label>
+            <span>Product / brand</span>
+            <input id="product-brand" required />
+          </label>
+          <label>
+            <span>Audience</span>
+            <input id="audience" required />
+          </label>
+        </div>
+
+        <label>
+          <span>Product surface</span>
+          <input id="product-surface" required />
+        </label>
+
+        <label>
+          <span>Visual style keywords</span>
+          <input id="visual-style" />
+        </label>
+
+        <label>
+          <span>Typography scale tokens</span>
+          <input id="typography-scale" />
+        </label>
+
+        <div class="token-group">
+          <div class="token-head">
+            <h3>Color Tokens</h3>
+            <button id="add-color-token" class="secondary token-add" type="button">Add color</button>
+          </div>
+          <p class="hint">Name each color by semantic role and describe what it should do.</p>
+          <div id="color-tokens" class="token-list"></div>
+        </div>
+
+        <div class="token-group">
+          <div class="token-head">
+            <h3>Spacing Tokens</h3>
+            <button id="add-spacing-token" class="secondary token-add" type="button">Add spacing</button>
+          </div>
+          <p class="hint">Define spacing values with units and usage intent.</p>
+          <div id="spacing-tokens" class="token-list"></div>
+        </div>
+
+        <div class="token-group">
+          <div class="token-head">
+            <h3>Radius Tokens</h3>
+            <button id="add-radius-token" class="secondary token-add" type="button">Add radius</button>
+          </div>
+          <p class="hint">Use radius tokens for corners across controls and surfaces.</p>
+          <div id="radius-tokens" class="token-list"></div>
+        </div>
+
+        <div class="token-group">
+          <div class="token-head">
+            <h3>Shadow Tokens</h3>
+            <button id="add-shadow-token" class="secondary token-add" type="button">Add shadow</button>
+          </div>
+          <p class="hint">Define shadow geometry plus color and opacity with a picker.</p>
+          <div id="shadow-tokens" class="token-list"></div>
+        </div>
+
+        <div class="token-group">
+          <div class="token-head">
+            <h3>Motion Tokens</h3>
+            <button id="add-motion-token" class="secondary token-add" type="button">Add motion</button>
+          </div>
+          <p class="hint">Define duration and easing for transitions.</p>
+          <div id="motion-tokens" class="token-list"></div>
+        </div>
+
+        <label>
+          <span>Framework-specific implementation notes</span>
+          <textarea id="framework-notes" rows="3"></textarea>
+        </label>
+
+        <div class="grid two">
+          <label>
+            <span>Additional "Do" rules (one per line)</span>
+            <textarea id="do-rules" rows="5"></textarea>
+          </label>
+          <label>
+            <span>Additional "Don't" rules (one per line)</span>
+            <textarea id="dont-rules" rows="5"></textarea>
+          </label>
+        </div>
+
+        <label>
+          <span>Additional QA checks (one per line)</span>
+          <textarea id="qa-checks" rows="4"></textarea>
+        </label>
+
+        <fieldset>
+          <legend>Optional extension files</legend>
+          <label class="check">
+            <input id="include-reference" type="checkbox" />
+            <span>Generate <code>reference.md</code></span>
+          </label>
+          <label class="check">
+            <input id="include-examples" type="checkbox" />
+            <span>Generate <code>examples.md</code></span>
+          </label>
+          <label class="check">
+            <input id="include-script" type="checkbox" />
+            <span>Generate <code>scripts/validate-skill.sh</code></span>
+          </label>
+        </fieldset>
+      </form>
+
+      <section class="panel">
+        <div class="section-head">
+          <h2>Output</h2>
+          <div class="actions">
+            <button id="copy-button" class="secondary" type="button">Copy skill.md</button>
+            <button id="download-skill-button" class="secondary" type="button">Download skill.md</button>
+            <button id="download-all-button" type="button">Download all</button>
+          </div>
+        </div>
+
+        <div id="status-message" data-kind="success" class="status">Ready.</div>
+        <textarea id="skill-preview" rows="18" readonly></textarea>
+        <div id="file-downloads" class="download-grid"></div>
+      </section>
+    </main>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

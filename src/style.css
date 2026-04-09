@@ -1,10 +1,380 @@
 @import "@penpot/plugin-styles/styles.css";
 
-body {
-  line-height: 1.5;
-  padding: 10px;
+:root {
+  font-family: "Space Grotesk", "IBM Plex Sans", "Avenir Next", sans-serif;
+  --bg: #f7f2e7;
+  --bg-ornament: #f0e6d2;
+  --panel: #fffdf8;
+  --ink: #1f1a14;
+  --ink-subtle: #665c4e;
+  --line: #d8cdb9;
+  --accent: #0c7a6d;
+  --accent-pressed: #08584f;
+  --danger: #b42318;
+  --focus: #1f4ff4;
 }
 
+body[data-theme="dark"] {
+  --bg: #18211f;
+  --bg-ornament: #223230;
+  --panel: #23302d;
+  --ink: #f7f2e7;
+  --ink-subtle: #cbc0ad;
+  --line: #3b4f4a;
+  --accent: #58ccb9;
+  --accent-pressed: #37a896;
+  --danger: #f09186;
+  --focus: #96b3ff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.45;
+  background:
+    radial-gradient(circle at 10% 12%, var(--bg-ornament), transparent 36%),
+    radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 30%),
+    var(--bg);
+}
+
+.shell {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 18px 14px 26px;
+  display: grid;
+  gap: 12px;
+}
+
+.hero,
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 8px 20px #0000000f;
+}
+
+.hero {
+  display: grid;
+  gap: 8px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+h1,
+h2,
+h3,
 p {
-  margin-block-end: 0.75rem;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.06;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+h3 {
+  font-size: 15px;
+}
+
+.lede {
+  color: var(--ink-subtle);
+  max-width: 70ch;
+}
+
+.links {
+  color: var(--ink-subtle);
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: var(--accent-pressed);
+}
+
+.section-head {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+}
+
+.grid {
+  display: grid;
+  gap: 10px;
+}
+
+.grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+label {
+  display: grid;
+  gap: 6px;
+}
+
+label > span,
+legend {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  background: color-mix(in srgb, var(--panel) 90%, white 10%);
+  color: var(--ink);
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.token-group {
+  border: 1px dashed color-mix(in srgb, var(--line) 70%, var(--accent) 30%);
+  border-radius: 12px;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+  background: color-mix(in srgb, var(--panel) 92%, var(--bg-ornament) 8%);
+}
+
+.token-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.token-add {
+  padding-inline: 12px;
+}
+
+.hint {
+  color: var(--ink-subtle);
+  font-size: 12px;
+}
+
+.token-list {
+  display: grid;
+  gap: 8px;
+}
+
+.token-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px;
+  background: color-mix(in srgb, var(--panel) 85%, white 15%);
+  align-items: flex-end;
+}
+
+.token-field {
+  display: grid;
+  gap: 4px;
+}
+
+.token-field > span {
+  font-size: 11px;
+  color: var(--ink-subtle);
+  font-weight: 600;
+}
+
+.field-mini {
+  min-width: 70px;
+  flex: 0 1 70px;
+}
+
+.field-tiny {
+  min-width: 78px;
+  flex: 0 1 78px;
+}
+
+.field-small {
+  min-width: 96px;
+  flex: 0 1 96px;
+}
+
+.field-medium {
+  min-width: 150px;
+  flex: 1 1 150px;
+}
+
+.field-large {
+  min-width: 220px;
+  flex: 2 1 220px;
+}
+
+.field-color {
+  min-width: 96px;
+  flex: 0 1 96px;
+}
+
+.token-row input[type="color"] {
+  min-height: 40px;
+  padding: 4px;
+}
+
+.remove-token {
+  margin-left: auto;
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--line) 55%);
+  background: transparent;
+  color: var(--danger);
+}
+
+.remove-token:hover {
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+}
+
+fieldset {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.check {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.check input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+button {
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, black 15%);
+  background: var(--accent);
+  color: #ffffff;
+  border-radius: 9px;
+  padding: 8px 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+button:hover {
+  background: var(--accent-pressed);
+}
+
+button.secondary:hover {
+  background: color-mix(in srgb, var(--panel) 85%, var(--ink) 15%);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.status {
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  margin-bottom: 10px;
+}
+
+.status[data-kind="success"] {
+  background: color-mix(in srgb, var(--accent) 12%, var(--panel) 88%);
+}
+
+.status[data-kind="warning"] {
+  background: color-mix(in srgb, #f3a803 16%, var(--panel) 84%);
+}
+
+.status[data-kind="error"] {
+  background: color-mix(in srgb, var(--danger) 16%, var(--panel) 84%);
+}
+
+#skill-preview {
+  min-height: 300px;
+  font-family: "IBM Plex Mono", "Menlo", monospace;
+  line-height: 1.4;
+}
+
+.download-grid {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+
+  .grid.two {
+    grid-template-columns: 1fr;
+  }
+
+  .token-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .remove-token {
+    margin-left: 0;
+  }
 }

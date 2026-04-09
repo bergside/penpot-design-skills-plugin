@@ -1,17 +1,4 @@
-penpot.ui.open("Penpot plugin starter template", `?theme=${penpot.theme}`);
-
-penpot.ui.onMessage<string>((message) => {
-  if (message === "create-text") {
-    const text = penpot.createText("Hello world!");
-
-    if (text) {
-      text.x = penpot.viewport.center.x;
-      text.y = penpot.viewport.center.y;
-
-      penpot.selection = [text];
-    }
-  }
-});
+penpot.ui.open("TypeUI Design Skill Generator", `?theme=${penpot.theme}`);
 
 // Update the theme in the iframe
 penpot.on("themechange", (theme) => {

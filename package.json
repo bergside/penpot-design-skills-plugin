@@ -1,7 +1,10 @@
 {
-  "name": "penpot-plugin-starter-template",
+  "name": "penpot-design-md-skills-plugin",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Penpot plugin that generates design skill files in MD format for AI tools such as Claude, Codex, Gemini, Cursor, and more.",
+  "author": "TypeUI",
+  "homepage": "https://www.typeui.sh",
   "type": "module",
   "scripts": {
     "dev": "vite build --watch",
